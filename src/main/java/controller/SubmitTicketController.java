@@ -8,6 +8,6 @@ public class SubmitTicketController {
 
     @GetMapping("/")
     public String submitTicket() {
-        return "submitticket";
+        return "index";
     }
 }
