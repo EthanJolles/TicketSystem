@@ -20,7 +20,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/public/**").permitAll()  // Allow public access to these URLs
-                        .requestMatchers("/admin/**").authenticated()  // Secure the /secure/** endpoints
+                        .requestMatchers("/admin/**", "/service/**").authenticated()  // Secure the /secure/** endpoints
                 )
                 .httpBasic(Customizer.withDefaults());  // Enable Basic Authentication
 
