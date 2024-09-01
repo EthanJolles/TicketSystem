@@ -1,5 +1,6 @@
 package com.cmsc495.ticketsystem.model;
 
+import com.cmsc495.ticketsystem.model.ticket.NotesModel;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

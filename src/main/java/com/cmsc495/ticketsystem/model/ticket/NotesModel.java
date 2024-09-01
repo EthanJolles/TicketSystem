@@ -1,5 +1,6 @@
-package com.cmsc495.ticketsystem.model;
+package com.cmsc495.ticketsystem.model.ticket;
 
+import com.cmsc495.ticketsystem.model.TicketModel;
 import jakarta.persistence.*;
 
 @Entity
