@@ -1,4 +1,4 @@
-package com.cmsc495.ticketsystem.controller.data;
+package com.cmsc495.ticketsystem.controller;
 
 import com.cmsc495.ticketsystem.model.TicketModel;
 import com.cmsc495.ticketsystem.service.TicketService;
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/service")
+@RequestMapping("/admin")
 public class TicketController {
 
     @Autowired
     private TicketService ticketService;
 
-    @GetMapping("/tickets")
+    @GetMapping("/ticket")
     public String viewTasks(Model model) {
         List<TicketModel> ticketModelList = ticketService.findAllTickets();
         model.addAttribute("tickets", ticketModelList);
-        return "tickets";
+        return "ticket";
     }
 
 }
