@@ -1,4 +1,4 @@
-package com.cmsc495.ticketsystem.security;
+package com.cmsc495.ticketsystem.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/public/**").permitAll()  // Allow public access to these URLs
+                        .requestMatchers("/", "/public/**", "/css/**").permitAll()  // Allow public access to these URLs
                         .requestMatchers("/admin/**", "/service/**").authenticated()  // Secure the /secure/** endpoints
                 )
                 .httpBasic(Customizer.withDefaults());  // Enable Basic Authentication
