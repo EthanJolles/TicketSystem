@@ -1,6 +1,6 @@
 package com.cmsc495.ticketsystem.service;
 
-import com.cmsc495.ticketsystem.model.NotesModel;
+import com.cmsc495.ticketsystem.model.ticket.NotesModel;
 import com.cmsc495.ticketsystem.model.TicketModel;
 import com.cmsc495.ticketsystem.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
