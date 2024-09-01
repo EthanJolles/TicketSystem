@@ -1,8 +1,6 @@
 package com.cmsc495.ticketsystem.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +9,7 @@ import java.util.List;
 public class TicketModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -24,8 +23,8 @@ public class TicketModel {
     private String description;
     private boolean isCompleted;
 
-    @OneToMany
-    private ArrayList<NotesModel> notes;
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<NotesModel> notes = new ArrayList<>();
 
     public void setId(Long id) {
         this.id = id;
@@ -67,7 +66,7 @@ public class TicketModel {
         this.issueType = issueType;
     }
 
-    public ArrayList<NotesModel> getNotes() {
+    public List<NotesModel> getNotes() {
         return notes;
     }
 
@@ -89,5 +88,17 @@ public class TicketModel {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public void addNoteToTicket(String noteContent) {
+        NotesModel note = new NotesModel();
+        note.setNote(noteContent);
+        note.setTicket(this); // Set the current ticket as the owner of the note
+        this.notes.add(note); // Add the note to the list of notes
+    }
+
+    public void removeNoteFromTicket(NotesModel note) {
+        this.notes.remove(note);
+        note.setTicket(null); // Break the association with this ticket
     }
 }
