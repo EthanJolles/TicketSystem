@@ -18,7 +18,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping("/ticket")
-    public String viewTasks(Model model) {
+    public String viewTickets(Model model) {
         List<TicketModel> ticketModelList = ticketService.findAllTickets();
         model.addAttribute("tickets", ticketModelList);
         return "ticket";
