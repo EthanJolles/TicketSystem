@@ -32,7 +32,7 @@ public class SubmitTicketController {
     }
 
     @PostMapping("/public/submit")
-    public void submitTicket(@RequestParam String name,
+    public String submitTicket(@RequestParam String name,
                                @RequestParam String email,
                                @RequestParam String department,
                                @RequestParam String issueType,
@@ -47,6 +47,7 @@ public class SubmitTicketController {
         String subject = department + issueType + ticket.getCreationDate();
 
         // Send confirmation email
-        emailService.sendEmail(email, subject, "Ticket received!");
+//        emailService.sendEmail(email, subject, "Ticket received!");
+        return "redirect:/public";
     }
 }
