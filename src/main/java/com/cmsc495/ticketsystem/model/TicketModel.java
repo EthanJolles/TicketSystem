@@ -3,6 +3,7 @@ package com.cmsc495.ticketsystem.model;
 import com.cmsc495.ticketsystem.model.ticket.NotesModel;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +18,27 @@ public class TicketModel {
 
     private String email;
 
+    private LocalDate creationDate;
+
     private String department;
 
     private String issueType;
 
     private String description;
-    private boolean isCompleted;
+    private boolean isCompleted = false;
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NotesModel> notes = new ArrayList<>();
 
-    public void setId(Long id) {
-        this.id = id;
+    public TicketModel() {};
+
+    public TicketModel(String name, String email, String department, String issueType, String description) {
+        this.name = name;
+        this.email = email;
+        this.department = department;
+        this.issueType = issueType;
+        this.description = description;
+        this.creationDate = LocalDate.now();
     }
 
     public Long getId() {
@@ -39,16 +49,8 @@ public class TicketModel {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getDepartment() {
@@ -61,10 +63,6 @@ public class TicketModel {
 
     public String getIssueType() {
         return issueType;
-    }
-
-    public void setIssueType(String issueType) {
-        this.issueType = issueType;
     }
 
     public List<NotesModel> getNotes() {
@@ -101,5 +99,9 @@ public class TicketModel {
     public void removeNoteFromTicket(NotesModel note) {
         this.notes.remove(note);
         note.setTicket(null); // Break the association with this ticket
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
     }
 }
