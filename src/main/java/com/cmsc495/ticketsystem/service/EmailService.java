@@ -26,7 +26,7 @@ public class EmailService {
     @Value("${spring.mail.username}")
     String address;
 
-    @Value("${spring.mail.port}")
+    @Value("${spring.mail.password}")
     String password;
 
     public void sendEmail( String to, String subject, String text) {
