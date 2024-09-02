@@ -2,12 +2,12 @@ package com.cmsc495.ticketsystem.controller;
 import com.cmsc495.ticketsystem.model.TicketModel;
 import com.cmsc495.ticketsystem.service.EmailService;
 import com.cmsc495.ticketsystem.service.TicketService;
-import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
@@ -22,12 +22,17 @@ public class SubmitTicketController {
     EmailService emailService;
 
     @GetMapping("/")
+    public String redirectToSubmitTicketPage() {
+        return "redirect:/public";
+    }
+
+    @GetMapping("/public")
     public String showSubmitTicketPage() {
         return "submit";
     }
 
-    @PostMapping("/submit")
-    public String submitTicket(@RequestParam String name,
+    @PostMapping("/public/submit")
+    public void submitTicket(@RequestParam String name,
                                @RequestParam String email,
                                @RequestParam String department,
                                @RequestParam String issueType,
@@ -43,8 +48,5 @@ public class SubmitTicketController {
 
         // Send confirmation email
         emailService.sendEmail(email, subject, "Ticket received!");
-
-        // Redirect or return a view
-        return "redirect:/";
     }
 }

@@ -44,7 +44,7 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public TicketModel saveTicket(TicketModel ticket) {
-        return ticketRepository.save(ticket);
+    public void saveTicket(TicketModel ticket) {
+        ticketRepository.save(ticket);
     }
 }
