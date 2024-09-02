@@ -1,0 +1,47 @@
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+
+public class Email {
+
+    private String username;
+    private String password;
+    private Properties properties;
+    private Session session;
+
+    // Constructor to initialize the email service with credentials
+    public EmailService() {
+        this.username = "itms.ticket@gmail.com";
+        this.password = "umgc2024";
+
+        // Set up SMTP server properties
+        properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+        // Initialize session with authentication
+        session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+    }
+
+    // Method to send an email
+    public void sendEmail(String toAddress, String subject, String body) throws MessagingException {
+        // Create a message
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(username));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
+        message.setSubject(subject);
+        message.setText(body);
+
+        // Send the message
+        Transport.send(message);
+        System.out.println("Email sent successfully to " + toAddress);
+    }
+}
