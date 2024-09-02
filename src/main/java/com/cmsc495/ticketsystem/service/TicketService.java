@@ -6,6 +6,9 @@ import com.cmsc495.ticketsystem.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -31,6 +34,10 @@ public class TicketService {
 
         ticket.removeNoteFromTicket(note);
         ticketRepository.save(ticket); // This will remove the note from the ticket and delete it from the database
+    }
+
+    public String getFormattedCreationDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
     }
 
     public List<TicketModel> findAllTickets() {

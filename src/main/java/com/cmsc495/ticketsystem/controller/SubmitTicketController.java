@@ -1,42 +1,50 @@
 package com.cmsc495.ticketsystem.controller;
+import com.cmsc495.ticketsystem.model.TicketModel;
+import com.cmsc495.ticketsystem.service.EmailService;
+import com.cmsc495.ticketsystem.service.TicketService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.sql.Date;
 
 @Controller
 public class SubmitTicketController {
 
+    @Autowired
+    TicketService ticketService;
+
+    @Autowired
+    EmailService emailService;
+
     @GetMapping("/")
     public String showSubmitTicketPage() {
         return "submit";
-
-    @Autowired
-    private EmailService emailService;
-
-    @Autowired
-    private TicketRepository ticketRepository;
+    }
 
     @PostMapping("/submit")
-    public String submitTicket(TicketModel ticket) {
-        // Save the ticket to the database
-        ticketRepository.save(ticket);
+    public String submitTicket(@RequestParam String name,
+                               @RequestParam String email,
+                               @RequestParam String department,
+                               @RequestParam String issueType,
+                               @RequestParam String description,
+                               Model model) {
 
-        // Send a confirmation email to the user
-        try {
-            emailService.sendEmail(ticket.getUserEmail(), 
-                                   "Ticket Submitted", 
-                                   "Your ticket has been successfully submitted.");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-            // Handle the email sending error, perhaps show an error message to the user
-        }
+        // Create and save ticket object
+        TicketModel ticket = new TicketModel(name, email, department, issueType, description);
+        ticketService.saveTicket(ticket);
+
+        // Prep subject
+        String subject = department + issueType + ticket.getCreationDate();
+
+        // Send confirmation email
+        emailService.sendEmail(email, subject, "Ticket received!");
 
         // Redirect or return a view
-        return "redirect:/tickets/confirmation";
-    }
-}
-
+        return "redirect:/";
     }
 }
