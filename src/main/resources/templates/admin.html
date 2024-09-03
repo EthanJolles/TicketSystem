@@ -100,10 +100,28 @@
 
     <section>
         <h2>Recent Tickets</h2>
-        <table border="1" cellpadding="10">
+        <table>
             <thead>
             <tr>
                 <th>Ticket ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Date Created</th>
             </tr>
+            </thead>
+            <tbody>
+            <!-- Iterating over the tickets list passed from the controller -->
+            <tr th:each="ticket : ${tickets}">
+                <td th:text="${ticket.getId()}"></td>
+                <td th:text="${ticket.getName()}"></td>
+                <td th:text="${ticket.getDescription()}"></td>
+                <td th:text="${ticket.isCompleted()}"></td>
+                <td th:text="${ticket.getCreationDate()}"></td>
+            </tr>
+            </tbody>
+        </table>
     </section>
 </main>
+</body>
+</html>
