@@ -2,7 +2,6 @@ package com.cmsc495.ticketsystem.controller;
 import com.cmsc495.ticketsystem.model.TicketModel;
 import com.cmsc495.ticketsystem.service.EmailService;
 import com.cmsc495.ticketsystem.service.TicketService;
-import com.cmsc495.ticketsystem.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +14,6 @@ public class SubmitTicketController {
 
     @Autowired
     TicketService ticketService;
-
-    @Autowired
-    TokenService tokenService;
 
     @Autowired
     EmailService emailService;
@@ -39,21 +35,23 @@ public class SubmitTicketController {
                                @RequestParam String issueType,
                                @RequestParam String description,
                                Model model) {
-        String accessToken = tokenService.refreshAccessToken();
 
         // Create and save ticket object
         TicketModel ticket = new TicketModel(name, email, department, issueType, description);
         ticketService.saveTicket(ticket);
 
-        // Prep subject
-        String subject = department + issueType + ticket.getCreationDate();
+        // Send email
+        sendEmail(ticket, email, department, issueType);
 
-        // Send confirmation email
+        return "redirect:/public";
+    }
+
+    private void sendEmail(TicketModel ticketModel, String email, String department, String issueType) {
         try {
-            emailService.sendEmail(email, subject, "Ticket received!", accessToken);
+            emailService.sendEmail(email, department + issueType + ticketModel.getCreationDate(), "Ticket submitted!");
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "redirect:/public";
     }
 }

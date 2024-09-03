@@ -1,32 +1,68 @@
 package com.cmsc495.ticketsystem.service;
 
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.model.Message;
+
+import jakarta.mail.Session;
+import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayOutputStream;
+import java.util.Base64;
+import java.util.Properties;
 
 @Service
 public class EmailService {
 
-    @Autowired
-    JavaMailSender javaMailSender;
+    @Value("${GMAIL_CLIENT_ID}")
+    private String clientId;
 
-    @Value("${MAIL_ADDRESS}")
-    private String fromAddress;
+    @Value("${GMAIL_CLIENT_SECRET}")
+    private String clientSecret;
 
-    public void sendEmail( String to, String subject, String text, String accessToken) throws Exception {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+    @Value("${google.refresh-token}")
+    private String refreshToken;
 
-        helper.setText(text, true);
-        helper.setTo(to);
-        helper.setSubject(subject);
-        helper.setFrom(fromAddress);
+    public void sendEmail(String toEmail, String subject, String body) throws Exception {
+        // Build the GoogleCredential object with your OAuth2 details
+        GoogleCredential credential = new GoogleCredential.Builder()
+                .setClientSecrets(clientId, clientSecret)
+                .setJsonFactory(JacksonFactory.getDefaultInstance())
+                .setTransport(GoogleNetHttpTransport.newTrustedTransport())
+                .build();
 
-        mimeMessage.addHeader("Authorization", "Bearer" + accessToken);
+        // Set the refresh token
+        credential.setRefreshToken(refreshToken);
 
-        javaMailSender.send(mimeMessage);
+        // Refresh the access token using the refresh token
+        if (credential.refreshToken()) {
+            Gmail service = new Gmail.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), credential)
+                    .setApplicationName("Gmail API")
+                    .build();
+
+            MimeMessage email = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
+            email.setFrom(new InternetAddress("your-email@gmail.com"));
+            email.addRecipient(jakarta.mail.Message.RecipientType.TO, new InternetAddress(toEmail));
+            email.setSubject(subject);
+            email.setText(body);
+
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            email.writeTo(buffer);
+            byte[] rawMessage = buffer.toByteArray();
+            String encodedEmail = Base64.getUrlEncoder().encodeToString(rawMessage);
+
+            Message message = new Message();
+            message.setRaw(encodedEmail);
+
+            service.users().messages().send("me", message).execute();
+        } else {
+            throw new Exception("Failed to refresh access token");
+        }
     }
 }
