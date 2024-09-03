@@ -18,8 +18,8 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String showAdminPage(Model model) {
-//        List<TicketModel> ticketModelList = ticketService.findAllTickets();
-//        model.addAttribute("tickets", ticketModelList);
+        List<TicketModel> ticketModelList = ticketService.findAllTickets();
+        model.addAttribute("tickets", ticketModelList);
         return "admin";
     }
 }

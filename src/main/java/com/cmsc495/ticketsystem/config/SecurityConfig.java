@@ -18,7 +18,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()  // Disable CSRF protection
+                .csrf().disable()  // Jolles - Disable CSRF protection - NOT recommended for production apps
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/public/**", "/css/**").permitAll()  // Allow public access to these URLs
                         .requestMatchers("/admin/**", "/service/**").authenticated()  // Secure the /secure/** endpoints
