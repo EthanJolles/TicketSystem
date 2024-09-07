@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket Details</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="ticket-details-page"></body>
+    <h1>Ticket Details</h1>
+
+    <!-- Display ticket details -->
+    <div class="ticket-details-container">
+        <label>ID:</label> <span th:text="${ticket.id}"></span><br/>
+        <label>Name:</label> <span th:text="${ticket.name}"></span><br/>
+        <label>Email:</label> <span th:text="${ticket.email}"></span><br/>
+        <label>Department:</label> <span th:text="${ticket.department}"></span><br/>
+        <label>Issue Type:</label> <span th:text="${ticket.issueType}"></span><br/>
+        <label>Description:</label> <p th:text="${ticket.description}"></p><br/>
+        <label>Status:</label> 
+        <form th:action="@{/admin/ticket/update}" method="post">
+            <input type="hidden" name="id" th:value="${ticket.id}"/>
+            <select name="status">
+                <option value="New" th:selected="${ticket.status == 'New'}">New</option>
+                <option value="In Progress" th:selected="${ticket.status == 'In Progress'}">In Progress</option>
+                <option value="Closed" th:selected="${ticket.status == 'Closed'}">Closed</option>
+            </select>
+            <br/>
+            <label>Troubleshooting Notes:</label><br/>
+            <textarea name="notes" th:text="${ticket.troubleshootingNotes}"></textarea><br/>
+            <button type="submit" class="btn">Update</button>
+            <a href="/admin" class="btn cancel">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
