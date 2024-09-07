@@ -47,7 +47,7 @@ This page holds the HTML for the admin html page
                     <td>
                         <!-- Link to open the ticket for status update -->
                         <a th:href="@{/admin/ticket-details/{id}(id=${ticket.id})}" th:text="${ticket.status}"></a>
-                    <td th:text="${ticket.formattedDate}"></td>
+                    <td th:text="${ticket.getFormattedDate()}"></td>
                     <td th:text="${ticket.name}"></td>
                     <td th:text="${ticket.email}"></td>
                     <td th:text="${ticket.department}"></td>
