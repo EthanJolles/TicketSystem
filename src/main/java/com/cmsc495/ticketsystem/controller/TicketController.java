@@ -1,3 +1,12 @@
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ * 07 SEP 24
+ * This is the TicketController class.
+ * This class handles requests related to ticket management for the admin. 
+ * It provides functionality for viewing individual ticket details and updating ticket status,
+ * including adding troubleshooting notes.
+ */
+
 package com.cmsc495.ticketsystem.controller;
 
 import com.cmsc495.ticketsystem.model.TicketModel;

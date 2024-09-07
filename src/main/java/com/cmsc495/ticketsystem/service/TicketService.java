@@ -1,3 +1,13 @@
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ * 07 SEP 24
+ * This is the TicketService class.
+ * This class acts as the service layer between the controller and the repository.
+ * It contains methods to interact with the TicketRepository for performing ticket-related operations.
+ * These include updating ticket status, adding troubleshooting notes, finding all tickets, saving tickets,
+ * and retrieving a specific ticket by ID.
+ */
+
 package com.cmsc495.ticketsystem.service;
 
 import com.cmsc495.ticketsystem.model.TicketModel;

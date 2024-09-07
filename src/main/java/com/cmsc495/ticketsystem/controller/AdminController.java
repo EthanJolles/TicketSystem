@@ -1,3 +1,12 @@
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ * 07 SEP 24
+ * This is the AdminController class.
+ * This class handles the request for the admin page. 
+ * It uses the TicketService to retrieve all the tickets from the database
+ * and adds them to the model, making them available to the admin view.
+ */
+
 package com.cmsc495.ticketsystem.controller;
 
 import com.cmsc495.ticketsystem.model.TicketModel;
