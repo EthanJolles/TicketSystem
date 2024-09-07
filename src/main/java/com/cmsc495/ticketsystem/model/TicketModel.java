@@ -2,36 +2,45 @@ package com.cmsc495.ticketsystem.model;
 
 import com.cmsc495.ticketsystem.model.ticket.NotesModel;
 import jakarta.persistence.*;
+import java.time.format.DateTimeFormatter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "tickets")  // Specify the exact table name
 public class TicketModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String status;
+
+    private LocalDate creationDate;
+
     private String name;
 
     private String email;
-
-    private LocalDate creationDate;
 
     private String department;
 
     private String issueType;
 
     private String description;
-    private boolean isCompleted = false;
+
+    private String troubleshootingNotes;
+    
+    //private boolean isCompleted = false;
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NotesModel> notes = new ArrayList<>();
 
     public TicketModel() {};
 
+    
+    
     public TicketModel(String name, String email, String department, String issueType, String description) {
         this.name = name;
         this.email = email;
@@ -81,13 +90,21 @@ public class TicketModel {
         this.description = description;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
+    public String getStatus(){
+        return status;
     }
 
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
+    //public boolean isCompleted() {
+        //return isCompleted;
+    //}
+
+    public void setStatus(String status){
+        this.status = status;
     }
+
+    //public void setCompleted(boolean completed) {
+        //isCompleted = completed;
+    //}
 
     public void addNoteToTicket(String noteContent) {
         NotesModel note = new NotesModel();
@@ -103,5 +120,20 @@ public class TicketModel {
 
     public LocalDate getCreationDate() {
         return creationDate;
+    }
+
+    public String getFormattedDate() {
+        if (this.creationDate == null) {
+            return "1999 01 01 01"; 
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMMyy");
+        return this.creationDate.format(formatter);
+    }
+    public String getTroubleshootingNotes() {
+        return troubleshootingNotes;
+    }
+    
+    public void setTroubleshootingNotes(String troubleshootingNotes) {
+        this.troubleshootingNotes = troubleshootingNotes;
     }
 }

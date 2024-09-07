@@ -47,4 +47,7 @@ public class TicketService {
     public void saveTicket(TicketModel ticket) {
         ticketRepository.save(ticket);
     }
+    public TicketModel findTicketById(Long id) {
+        return ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("Ticket not found"));
+    }
 }
