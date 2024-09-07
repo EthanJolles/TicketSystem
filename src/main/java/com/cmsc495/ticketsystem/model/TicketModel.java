@@ -1,3 +1,13 @@
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ * 07 SEP 24
+ * This is the TicketModel class.
+ * This class represents the ticket entity in the ticketing system.
+ * It includes fields such as the ticket's ID, status, creation date, and related details
+ * such as the user's name, email, department, issue type, description, and troubleshooting notes.
+ * It also handles the default values for the status and creation date upon ticket creation.
+ */
+
 package com.cmsc495.ticketsystem.model;
 
 import jakarta.persistence.*;
@@ -42,10 +52,10 @@ public class TicketModel {
     @PrePersist
     protected void onCreate() {
         if (status == null) {
-            status = "New"; // Set default value if not already set
+            status = "New"; // Set default value to New, this allows admins to see that it is a new ticket.
         }
         if (creationDate == null) {
-            creationDate = LocalDate.now(); // Set default creation date
+            creationDate = LocalDate.now(); // Set default creation date to current time
         }
     }
 
