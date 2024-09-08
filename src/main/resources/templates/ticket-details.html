@@ -1,0 +1,51 @@
+<!--
+  ITMS - A CMSC 495 Project
+  Group 2
+  07 SEP 24
+  This HTML file defines the Ticket Details page for the IT Ticket System.
+  
+  Features:
+  - Displays detailed information about a specific ticket, including its ID, name, 
+    email, department, issue type, description, and status.
+  - Provides a form that allows the admin to update the status of the ticket 
+    (New, In Progress, or Closed) and add troubleshooting notes.
+  - Includes a "Cancel" button to return to the Admin Dashboard without making changes.
+  
+  Thymeleaf is used to dynamically populate ticket details and render the 
+  form for updating ticket status and notes.
+  External CSS is linked to style the page.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ticket Details</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="ticket-details-page"></body>
+    <h1>Ticket Details</h1>
+
+    <!-- Display ticket details -->
+    <div class="ticket-details-container">
+        <label>ID:</label> <span th:text="${ticket.id}"></span><br/>
+        <label>Name:</label> <span th:text="${ticket.name}"></span><br/>
+        <label>Email:</label> <span th:text="${ticket.email}"></span><br/>
+        <label>Department:</label> <span th:text="${ticket.department}"></span><br/>
+        <label>Issue Type:</label> <span th:text="${ticket.issueType}"></span><br/>
+        <label>Description:</label> <p th:text="${ticket.description}"></p><br/>
+        <label>Status:</label> 
+        <form th:action="@{/admin/ticket/update}" method="post">
+            <input type="hidden" name="id" th:value="${ticket.id}"/>
+            <select name="status">
+                <option value="New" th:selected="${ticket.status == 'New'}">New</option>
+                <option value="In Progress" th:selected="${ticket.status == 'In Progress'}">In Progress</option>
+                <option value="Closed" th:selected="${ticket.status == 'Closed'}">Closed</option>
+            </select>
+            <br/>
+            <label>Troubleshooting Notes:</label><br/>
+            <textarea name="notes" th:text="${ticket.troubleshootingNotes}"></textarea><br/>
+            <button type="submit" class="btn">Update</button>
+            <a href="/admin" class="btn cancel">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

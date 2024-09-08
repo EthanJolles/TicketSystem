@@ -79,7 +79,7 @@ form {
 
 /* Button styling */
 .btn {
-    background-color: #4CAF50;
+    background-color: #360cc1;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -89,8 +89,9 @@ form {
 }
 
 .btn:hover {
-    background-color: #45a049;
+    background-color: #4c58b9;
 }
+
 
 /* Ticket list section */
 #ticketList {
@@ -112,3 +113,199 @@ footer {
 footer p {
     margin: 0;
 }
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    color: white;
+    display: block;
+    background-color: #360cc1;
+}
+
+nav ul li a:hover {
+    background-color: #4c58b9;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th,
+table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #dc1616;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: rgb(5, 0, 0);
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Section list styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+ul li:hover {
+    background-color: #f1f1f1;
+}
+
+/* Ensure the table takes up the full width */
+.full-width-table {
+    width: 100%;
+    table-layout: fixed; /* This ensures the columns are evenly spaced */
+    border-collapse: collapse;
+}
+
+/* Style the headers */
+.full-width-table th {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Optional: Style the empty table rows */
+.full-width-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+.table-wrapper {
+    max-height: 200px;
+    overflow-y: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures columns maintain fixed width */
+}
+th {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 1;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word; /* Ensures long words wrap properly */
+}
+/* Adjust column widths */
+th:nth-child(1), td:nth-child(1) { /* ID column */
+    width: 5%; /* Set ID column width to 5% */
+}
+th:nth-child(2), td:nth-child(3) { /* Status column */
+    width: 10%; /* Set reasonable width for status */
+}
+th:nth-child(3), td:nth-child(3) { /* Date column */
+    width: 10%; /* Set reasonable width for date */
+}
+th:nth-child(5), td:nth-child(5) { /* Email column */
+    width: 25%; /* Give email column more space */
+}
+
+/* Target the ticket-details.html page specifically */
+.ticket-details-page {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    color: #333;
+}
+
+.ticket-header {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.ticket-details-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Label styles */
+.ticket-details-container label {
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+    display: block;
+}
+
+.ticket-details-container span,
+.ticket-details-container p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+.ticket-details-container textarea{
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #f9f9f9; /* Subtle background color */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for focus */
+}
+.ticket-form {
+    margin-top: 20px;
+}
+/* Remove underline from cancel button */
+a.btn.cancel {
+    background-color: #360cc1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none; 
+}
+
+a.btn.cancel:hover {
+    background-color: #4c58b9;
+    text-decoration: none; /* Ensure underline doesn't appear on hover */
+}
+
+
+
