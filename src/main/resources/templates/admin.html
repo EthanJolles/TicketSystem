@@ -17,67 +17,81 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - IT Ticket System</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
-<header>
-    <h1>Admin Dashboard</h1>
-    <nav>
-        <ul>
-            <li><a href="/">ITMS SUBMIT PAGE</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <nav>
+            <div>
+                ITMS
+            </div>
+            <ul>
+                <li><a href="/">Submit A Ticket</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-    <section>
-        <h2>All Tickets</h2>
-        <!-- table for all tickets--> 
-        <div style="max-height: 400px; overflow-y: auto;">
-        <table class="full-width-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Status</th>
-                    <th>Date Submitted</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Department</th>
-                    <th>Issue Type</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Iterate over the tickets list -->
-                <tr th:each="ticket : ${tickets}">
-                    <td th:text="${ticket.id}"></td>
-                    <td>
-                        <!-- Link to open the ticket for status update -->
-                        <a th:href="@{/admin/ticket-details/{id}(id=${ticket.id})}" th:text="${ticket.status}"></a>
-                    <td th:text="${ticket.getFormattedDate()}"></td>
-                    <td th:text="${ticket.name}"></td>
-                    <td th:text="${ticket.email}"></td>
-                    <td th:text="${ticket.department}"></td>
-                    <td th:text="${ticket.issueType}"></td>
-                    <td th:text="${ticket.description}"></td>                    
-                </tr>
-            </tbody>
-        </table>
+    <main>
+        <section>
+            <h1>Admin Dashboard</h1>  
+            <!-- table for all tickets-->
+            <div class="container table-wrapper">
+                <h2>All Tickets</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Date Submitted</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Issue Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Iterate over the tickets list -->
+                        <tr th:each="ticket : ${tickets}">
+                            <td th:text="${ticket.id}"></td>
+                            <td>
+                                <!-- Link to open the ticket for status update -->
+                                <a th:href="@{/admin/ticket-details/{id}(id=${ticket.id})}"
+                                    th:text="${ticket.status}"></a>
+                            <td th:text="${ticket.getFormattedDate()}"></td>
+                            <td th:text="${ticket.name}"></td>
+                            <td th:text="${ticket.email}"></td>
+                            <td th:text="${ticket.department}"></td>
+                            <td th:text="${ticket.issueType}"></td>
+                            <td th:text="${ticket.description}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+        <!--<section>
+            <div class="form-group">
+                <form action="/logout" method="post">
+                    <button type="submit" class="btn">Logout</button>
+                </form>
+            </div>
+        </section>-->
+    </main>
+
+    <footer>
+        <div>
+            <p>&copy; 2024 IT Department. All rights reserved.</p>
         </div>
+    </footer>
 
-    </section>
-    <section>
-        <div class="form-group">
-            <form action="/logout" method="post">
-                <button type="submit" class="btn">Logout</button>
-            </form>
-        </div>
-    </section>
-
-</main>
 </body>
+
 </html>
