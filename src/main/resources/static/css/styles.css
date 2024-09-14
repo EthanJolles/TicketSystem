@@ -276,5 +276,23 @@ th:nth-child(5), td:nth-child(5) {  /*Email column */
     border-radius: 5px;
     font-size: 1.2em;
 }
+/* This lines up the checkbox and label on the titcket-details.html page
+when selecting to remove a database. */
+#removeCheckboxContainer {
+    display: inline-block; /* Ensure the container is inline */
+    margin-top: 1px; /* Optional: Add space above the container */
+}
+
+#removeCheckboxContainer input[type="checkbox"] {
+    display: inline-block; /* Keep the checkbox inline */
+    vertical-align: middle; /* Align it vertically */
+    margin-top: 8px; /* Adjust this value to move the checkbox down */
+}
+
+#removeCheckboxContainer label {
+    display: inline-block; /* Keep the label inline */
+    vertical-align: middle; /* Align the label vertically with the checkbox */
+    margin-left: 1px; /* Optional: add space between checkbox and label */
+}
 
 
