@@ -1,127 +1,97 @@
+<!--
+  ITMS - A CMSC 495 Project
+  Group 2
+  07 SEP 24
+  This HTML file defines the Admin Dashboard page for the IT Management System (ITMS).
+  
+  Features:
+  - Displays a table listing all IT tickets, including details such as ticket ID, status, 
+    date submitted, name, email, department, issue type, and description.
+  - Allows the admin to view and update the status of each ticket by linking 
+    to the ticket details page.
+  - Provides a logout button to allow the admin to securely log out of the system.
+  
+  Thymeleaf is used to dynamically render the list of tickets and their details.
+  The page includes responsive styling with an external CSS file.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - IT Ticket System</title>
-    <style>
-        /* Navigation menu styling */
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            padding: 10px 20px;
-            color: white;
-            display: block;
-            background-color: #4CAF50;
-        }
-
-        nav ul li a:hover {
-            background-color: #17b71c;
-        }
-
-        /* Table styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table th, table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #dc1616;
-        }
-
-        table th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        table tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Section list styling */
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        ul li:hover {
-            background-color: #f1f1f1;
-        }
-
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
-<header>
-    <h1>Admin Dashboard</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Dashboard</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <nav>
+            <div>
+                ITMS
+            </div>
+            <ul>
+                <li><a href="/">Submit A Ticket</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-    <section>
-        <h2>Overview</h2>
-        <p>Welcome, Admin! Here's a quick overview of the current system status:</p>
-        <ul>
-            <li>Total Tickets: 120</li>
-            <li>Open Tickets: 45</li>
-            <li>Closed Tickets: 75</li>
-            <li>Pending Tickets: 15</li>
-        </ul>
-    </section>
+    <main>
+        <section>
+            <h1>Admin Dashboard</h1>  
+            <!-- table for all tickets-->
+            <div class="container table-wrapper">
+                <h2>All Tickets</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Date Submitted</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Issue Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Iterate over the tickets list -->
+                        <tr th:each="ticket : ${tickets}">
+                            <td th:text="${ticket.id}"></td>
+                            <td>
+                                <!-- Link to open the ticket for status update -->
+                                <a th:href="@{/admin/ticket-details/{id}(id=${ticket.id})}"
+                                    th:text="${ticket.status}"></a>
+                            <td th:text="${ticket.getFormattedDate()}"></td>
+                            <td th:text="${ticket.name}"></td>
+                            <td th:text="${ticket.email}"></td>
+                            <td th:text="${ticket.department}"></td>
+                            <td th:text="${ticket.issueType}"></td>
+                            <td th:text="${ticket.description}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-    <section>
-        <h2>Recent Tickets</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Ticket ID</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Date Created</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Iterating over the tickets list passed from the controller -->
-            <tr th:each="ticket : ${tickets}">
-                <td th:text="${ticket.getId()}"></td>
-                <td th:text="${ticket.getName()}"></td>
-                <td th:text="${ticket.getDescription()}"></td>
-                <td th:text="${ticket.isCompleted()}"></td>
-                <td th:text="${ticket.getCreationDate()}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-</main>
+        </section>
+        <!--<section>
+            <div class="form-group">
+                <form action="/logout" method="post">
+                    <button type="submit" class="btn">Logout</button>
+                </form>
+            </div>
+        </section>-->
+    </main>
+
+    <footer>
+        <div>
+            <p>&copy; 2024 IT Department. All rights reserved.</p>
+        </div>
+    </footer>
+
 </body>
+
 </html>

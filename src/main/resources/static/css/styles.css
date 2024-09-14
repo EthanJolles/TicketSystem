@@ -1,41 +1,79 @@
-/* Reset some default browser styles */
+/*-------------------------------Formatting for all pages---------------------------------------------*/
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body and overall page style */
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    background-color: lightgrey;
     color: #333;
     line-height: 1.6;
-    padding: 20px;
 }
 
-/* Container styling */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
+nav {
+    /*background-color:#C0C0C0;*/
+    background-color: lightgrey;
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header styling */
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    text-align: center;
+nav div {
+    color: #360cc1;
+    padding: 30px;
+    margin-left: 60px;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: bold;
 }
 
-header h1 {
-    margin: 0;
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-right: 60px;
+}
+
+li {
+    display: flex;
+    font-size: 1.5rem;
+    padding: 20px;
+    padding-left: 60px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    color: #360cc1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
     font-size: 2.5em;
-    color: black;
+    color: #360cc1;
+    text-align: center;
+    padding: 30px;
+}
+
+main {
+    position: relative;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 /* Section headings */
@@ -45,7 +83,38 @@ h2 {
     color: #333;
 }
 
-/* Form styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    background-color: #360cc1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn:hover {
+    background-color: #4c58b9;
+}
+
+footer {
+    background-color:lightgrey;
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    width: 100%;
+}
+
+/*--------------------------- Formatting for submit.html------------------------------------------ */
 form {
     margin-bottom: 30px;
 }
@@ -73,42 +142,114 @@ form {
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: #4CAF50;
+    border-color: #360cc1;
     outline: none;
 }
 
-/* Button styling */
-.btn {
-    background-color: #4CAF50;
+/*-----------------------------Formatting for admin.html-------------------------------------------*/
+
+table {
+    width: 100%;
+    table-layout: fixed; /* This ensures the columns are evenly spaced */
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* Style the headers */
+th {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 1;
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    word-wrap: break-word; /* Ensures long words wrap properly */
+}
+
+.table-wrapper {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Adjust column widths */
+th:nth-child(1), td:nth-child(1) { /* ID column */
+    width: 5%;
+}
+th:nth-child(2), td:nth-child(3) { /* Status column */
+    width: 10%; 
+}
+th:nth-child(3), td:nth-child(3) { /* Date column */
+    width: 10%;
+}
+th:nth-child(5), td:nth-child(5) {  /*Email column */
+    width: 25%; 
+}
+
+/* ----------------------------Styling for ticket-details.html -------------------------------------*/
+
+.ticket-details-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Label styles */
+.ticket-details-container label {
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+    display: block;
+}
+
+.ticket-details-container span,
+.ticket-details-container p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+.ticket-details-container textarea{
+    width: 100%;
+    min-height: 300px;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px; 
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #f9f9f9; 
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease; /* Smooth transition for focus */
+}
+
+.cancel {
+    background-color: #360cc1;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1em; 
 }
 
-.btn:hover {
-    background-color: #45a049;
+.cancel:hover {
+    text-decoration: none; 
 }
 
-/* Ticket list section */
-#ticketList {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-}
-
-/* Footer styling */
-footer {
-    text-align: center;
-    padding: 10px 0;
-    margin-top: 20px;
-    background-color: #333;
-    color: white;
-}
-
-footer p {
-    margin: 0;
-}

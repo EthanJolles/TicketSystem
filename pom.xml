@@ -83,11 +83,6 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
             <version>3.3.2</version>
         </dependency>
-        <!-- Spring Security OAuth2 Dependency -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>
         <!-- Spring Boot OAuth2 Client -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -48,7 +48,7 @@ public class SubmitTicketController {
 
     private void sendEmail(TicketModel ticketModel, String email, String department, String issueType) {
         try {
-            emailService.sendEmail(email, department + issueType + ticketModel.getCreationDate(), "Ticket submitted!");
+            emailService.sendEmail(email, department + issueType + ticketModel.getFormattedDate(), "Ticket submitted!");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
