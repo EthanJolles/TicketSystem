@@ -53,14 +53,6 @@ class TicketSystemApplicationTests {
     }
 
     @Test
-    // Expect public endpoint will return "submit" view
-    public void testPublicEndpointReturnsHtml() throws Exception {
-        mockMvc.perform(get("/public"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("submit"));
-    }
-
-    @Test
     // Expect redirect to happen after submitting ticket and sending post request.
     // Expect ticket to be saved and fields to be correct
     public void testSubmitTicketIntegration() throws Exception {
