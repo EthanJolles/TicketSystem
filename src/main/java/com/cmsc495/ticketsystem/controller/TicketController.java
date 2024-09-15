@@ -39,8 +39,15 @@ public class TicketController {
     @PostMapping("/ticket/update")
     public String updateTicketDetails(@RequestParam Long id, 
                                       @RequestParam String status, 
-                                      @RequestParam String notes) {
-        ticketService.changeTicketAndStatus(id, status, notes);
+                                      @RequestParam String notes,
+                                      @RequestParam(required = false) boolean remove) {
+        if (remove) {
+        // If the remove checkbox is selected, delete the ticket from the database
+            ticketService.deleteTicketById(id);
+        } else {
+        // Otherwise, update the ticket's status and notes
+            ticketService.changeTicketAndStatus(id, status, notes);
+        }
         return "redirect:/admin"; // Redirect back to admin dashboard after update
     }
 }

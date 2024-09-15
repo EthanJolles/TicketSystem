@@ -18,12 +18,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()  // Jolles - Disable CSRF protection - NOT recommended for production apps
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/public/**", "/css/**").permitAll()  // Allow public access to these URLs
-                        .requestMatchers("/admin/**", "/service/**").authenticated()  // Secure the /secure/** endpoints
-                )
-                .httpBasic(Customizer.withDefaults());  // Enable Basic Authentication
+            .csrf().disable()  // Jolles - Disable CSRF protection - NOT recommended for production apps
+            .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/", "/public/**", "/css/**", "/js/**", "/images/**", "/favicon.ico", "/favicon-32x32.png", "/favicon-16x16.png", "/site.webmanifest", "/webjars/**").permitAll()  // Allow public access to these URLs
+                .requestMatchers("/admin/**", "/service/**").authenticated()  // Secure the /admin/** and /service/** endpoints
+            )
+            .httpBasic(Customizer.withDefaults());  // Enable Basic Authentication
 
         return http.build();
     }
