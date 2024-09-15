@@ -31,4 +31,9 @@ public class AdminController {
         model.addAttribute("tickets", ticketModelList);
         return "admin";
     }
+
+    @GetMapping("/admin/manage-users")
+    public String showManageUsersPage() {
+        return "manage-users";
+    }
 }
