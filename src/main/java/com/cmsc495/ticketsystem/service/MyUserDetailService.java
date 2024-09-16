@@ -1,3 +1,8 @@
+/* This is the MyUserDetailService class.
+ * This class acts as the service layer between the controller and the repository.
+ * It contains methods to interact with the MyUserRepository for performing user-related operations.
+ * These include loading a user by name, saving a user, and finding all users*/
+
 package com.cmsc495.ticketsystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;

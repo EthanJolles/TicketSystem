@@ -11,7 +11,6 @@ package com.cmsc495.ticketsystem.controller;
 
 import com.cmsc495.ticketsystem.model.MyUser;
 import com.cmsc495.ticketsystem.model.TicketModel;
-import com.cmsc495.ticketsystem.repository.MyUserRepository;
 import com.cmsc495.ticketsystem.service.MyUserDetailService;
 import com.cmsc495.ticketsystem.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +38,8 @@ public class AdminController {
         return "admin";
     }
 
+    /*navigates to manage-users page and uses myUserDetailService to retrieve all the users from the database
+    and adds them to the myUser model, making them available to the manage-users view */
     @GetMapping("/admin/manage-users")
     public String showManageUsersPage(Model model) {
         List<MyUser> myUserList = myUserDetailService.findAllUsers();
@@ -46,6 +47,7 @@ public class AdminController {
         return "manage-users";
     }
 
+    /*Creates and saves user to database when user created and stays on same page after submit */
     @PostMapping("/admin/manage-users/submit")
     public String createUser(@RequestParam String username,
                                @RequestParam String password,

@@ -1,3 +1,8 @@
+/*Configuration file to encrypt password. 
+*Used by MyUserDetailService to encrypt password before storage in database
+*Used by SecurityConfig when user enters password before password comparison
+*/
+
 package com.cmsc495.ticketsystem.config;
 
 import org.springframework.context.annotation.Bean;

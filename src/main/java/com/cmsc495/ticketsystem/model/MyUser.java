@@ -1,3 +1,5 @@
+/*MyUser class represents a user and is used define and create myUser objects */
+
 package com.cmsc495.ticketsystem.model;
 
 import jakarta.persistence.Entity;
@@ -8,7 +10,7 @@ import jakarta.persistence.Id;
 @Entity
 public class MyUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) //id automatically generated for use as key in database
     private Long id;
     private String username;
     private String password;
