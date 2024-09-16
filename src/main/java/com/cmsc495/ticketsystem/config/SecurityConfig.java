@@ -45,7 +45,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/public/**", "/css/**", "/login", "/logout"/js/**", "/images/**", "/favicon.ico", "/favicon-32x32.png", "/favicon-16x16.png", "/site.webmanifest", "/webjars/**").permitAll() // Allow public access to these URLs
+                        .requestMatchers("/", "/public/**", "/css/**", "/login", "/logout", "/js/**", "/images/**", "/favicon.ico", "/favicon-32x32.png", "/favicon-16x16.png", "/site.webmanifest", "/webjars/**").permitAll() // Allow public access to these URLs
                         .requestMatchers("/admin/**", "/service/**").authenticated() // Secure the /secure/** endpoints
                         .anyRequest().authenticated()
                 )
