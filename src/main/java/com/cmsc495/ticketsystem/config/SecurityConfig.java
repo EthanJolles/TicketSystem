@@ -10,12 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.cmsc495.ticketsystem.service.MyUserDetailService;
+import com.cmsc495.ticketsystem.config.PasswordEncoderConfig;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
@@ -25,6 +26,9 @@ public class SecurityConfig {
 
         @Autowired
         private MyUserDetailService userDetailService;
+
+        @Autowired
+        private PasswordEncoder passwordEncoder;
     /*
      * @Bean
      * public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
@@ -104,12 +108,12 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailService);
-        provider.setPasswordEncoder(passwordEncoder());
+        provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
  
-    @Bean
+    /*@Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
+    }*/
 }

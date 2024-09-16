@@ -14,6 +14,14 @@ public class MyUser {
     private String password;
     private String role;
 
+    public MyUser() {};
+
+    public MyUser (String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.role = "User";
+    }
+
     public Long getId() {
         return id;
     }

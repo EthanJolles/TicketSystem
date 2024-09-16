@@ -25,7 +25,7 @@
         <h1>Manage Users</h1>
         <div class="container">
             <h2>Create New User</h2>
-            <form action="/login" method="post">
+            <form action="/admin/manage-users/submit" method="post">
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" name="username" placeholder="Username" required>
@@ -39,6 +39,24 @@
                 </div>
                 
             </form>
+        </div>
+        <div class="container table-wrapper">
+            <h2>Current Users</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over the myUsers list -->
+                    <tr th:each="user : ${myUserList}">
+                        <td th:text="${myUsers.username}"></td>
+                        <td th:text="${myUsers.role}"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
 
