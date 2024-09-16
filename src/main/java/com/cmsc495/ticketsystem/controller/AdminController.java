@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,24 +39,37 @@ public class AdminController {
         return "admin";
     }
 
-    /*navigates to manage-users page and uses myUserDetailService to retrieve all the users from the database
-    and adds them to the myUser model, making them available to the manage-users view */
+    /*
+     * navigates to manage-users page and uses myUserDetailService to retrieve all
+     * the users from the database
+     * and adds them to the myUser model, making them available to the manage-users
+     * view
+     */
     @GetMapping("/admin/manage-users")
     public String showManageUsersPage(Model model) {
         List<MyUser> myUserList = myUserDetailService.findAllUsers();
-        model.addAttribute("myUsers", myUserList);
+        model.addAttribute("myUserList", myUserList);
         return "manage-users";
     }
 
-    /*Creates and saves user to database when user created and stays on same page after submit */
+    /*
+     * Creates and saves user to database when user created and stays on same page
+     * after submit
+     */
     @PostMapping("/admin/manage-users/submit")
     public String createUser(@RequestParam String username,
-                               @RequestParam String password,
-                               Model model) {
+            @RequestParam String password,
+            Model model) {
 
         // Create and save MyUser object
         MyUser myUser = new MyUser(username, password);
         myUserDetailService.saveMyUser(myUser);
         return "redirect:/admin/manage-users";
+    }
+
+    @PostMapping("/admin/delete-user/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        myUserDetailService.deleteUserById(id); // Call service to delete the user
+        return "redirect:/admin/manage-users"; // Redirect back to the manage-users page
     }
 }

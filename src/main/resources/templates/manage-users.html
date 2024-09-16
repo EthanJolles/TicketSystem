@@ -49,13 +49,20 @@
                     <tr>
                         <th>Username</th>
                         <th>Role</th>
+                        <th>Delete User</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Iterate over the myUsers list -->
-                    <tr th:each="user : ${myUserList}">
-                        <td th:text="${myUsers.username}"></td>
-                        <td th:text="${myUsers.role}"></td>
+                    <tr th:each="myUser : ${myUserList}">
+                        <td th:text="${myUser.username}"></td>
+                        <td th:text="${myUser.role}"></td>
+                        <td>
+                            <!--Link to delete user-->
+                            <form th:action="@{/admin/delete-user/{id}(id=${myUser.id})}" method="post" style="display:inline;">
+                                <input type="submit" value="Delete" />
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>
