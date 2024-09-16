@@ -66,7 +66,10 @@ public class SubmitTicketController {
 
     private void sendEmail(TicketModel ticketModel, String email, String department, String issueType) {
         try {
-            emailService.sendEmail(email, department + issueType + ticketModel.getFormattedDate(), "Ticket submitted! A tech will get to work on your ticket immediately. We will keep you updated with the status of your ticket until it is closed. Thank you for your patience.");
+            emailService.sendEmail(email, department + issueType + ticketModel.getFormattedDate(), "Ticket submitted! " +
+                    "A tech will get to work on your ticket immediately. " +
+                    "We will keep you updated with the status of your ticket until it is closed. " +
+                    "Thank you for your patience.");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
