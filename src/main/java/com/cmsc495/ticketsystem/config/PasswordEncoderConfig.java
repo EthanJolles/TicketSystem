@@ -1,7 +1,9 @@
-/*Configuration file to encrypt password. 
-*Used by MyUserDetailService to encrypt password before storage in database
-*Used by SecurityConfig when user enters password before password comparison
-*/
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ *Configuration file to encrypt password. 
+ *Used by MyUserDetailService to encrypt password before storage in database
+ *Used by SecurityConfig when user enters password before password comparison
+ */
 
 package com.cmsc495.ticketsystem.config;
 

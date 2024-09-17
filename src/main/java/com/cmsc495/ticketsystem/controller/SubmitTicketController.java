@@ -1,6 +1,5 @@
 /* ITMS - A CMSC 495 Project
  * Group 2
- * Last updated 14 SEP 24
  * This is the SubmitTicketController class.
  * This class handles the submission of IT tickets from the public page.
  * It uses the TicketService to save ticket information to the database

@@ -1,3 +1,8 @@
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ * Configuration file to initialize first user to database
+ */
+
 package com.cmsc495.ticketsystem.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +25,8 @@ public class UserInitializer {
                 // No users found, so create the first user
                 MyUser firstUser = new MyUser("admin", "$2a$12$QpKyxU1mahx7MwwL0zkU4.Rvc7JoGBwvDkk.L9fKFFhcfFQbrFzYO");
                 myUserRepository.save(firstUser);
-                System.out.println("First user 'admin' created with password 'admin'. Initial user should be deleted once other users established.");
+                System.out.println(
+                        "First user 'admin' created with password 'admin'. Initial user should be deleted once other users established.");
             }
         };
     }

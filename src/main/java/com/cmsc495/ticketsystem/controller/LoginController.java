@@ -1,4 +1,7 @@
-/*Controls redirects for login/logout*/
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ * Controls redirects for login/logout
+ */
 
 package com.cmsc495.ticketsystem.controller;
 

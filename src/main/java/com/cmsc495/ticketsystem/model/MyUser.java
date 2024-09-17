@@ -1,4 +1,7 @@
-/*MyUser class represents a user and is used define and create myUser objects */
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ * MyUser class represents a user and is used define and create myUser objects 
+ */
 
 package com.cmsc495.ticketsystem.model;
 
