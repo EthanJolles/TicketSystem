@@ -74,7 +74,7 @@ public class SubmitTicketController {
             String body = "Ticket submitted! A tech will get to work on your ticket immediately. " +
                     "We will keep you updated with the status of your ticket until it is closed. " +
                     "Thank you for your patience.";
-
+ 
             // Send the email with the formatted subject and body
             emailService.sendEmail(email, subject, body);
         } catch (Exception e) {

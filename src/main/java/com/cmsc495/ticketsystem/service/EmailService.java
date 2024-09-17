@@ -1,6 +1,5 @@
 package com.cmsc495.ticketsystem.service;
 
-import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -29,7 +28,7 @@ public class EmailService {
     @Value("${google.refresh-token}")
     private String refreshToken;
 
-    public void sendEmail(String toEmail, String subject, String body) throws Exception {
+    public boolean sendEmail(String toEmail, String subject, String body) throws Exception {
         // Build the GoogleCredential object with your OAuth2 details
         GoogleCredential credential = new GoogleCredential.Builder()
                 .setClientSecrets(clientId, clientSecret)
@@ -64,5 +63,6 @@ public class EmailService {
         } else {
             throw new Exception("Failed to refresh access token");
         }
+        return false;
     }
 }

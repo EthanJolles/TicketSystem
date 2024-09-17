@@ -23,26 +23,52 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
-    public void changeTicketAndStatus(Long ticketId, String status, String noteContent) {
-        TicketModel ticket = ticketRepository.findById(ticketId).orElseThrow(()
-                -> new RuntimeException("Ticket not found"));
+    /**
+     * Changes the status of a ticket and adds troubleshooting notes.
+     * @param ticketId ID of the ticket to be updated.
+     * @param status New status for the ticket.
+     * @param noteContent Troubleshooting notes to be added.
+     * @return The updated TicketModel object.
+     */
+    public TicketModel changeTicketAndStatus(Long ticketId, String status, String noteContent) {
+        TicketModel ticket = ticketRepository.findById(ticketId).orElseThrow(() ->
+                new RuntimeException("Ticket not found"));
         ticket.setTroubleshootingNotes(noteContent);
         ticket.setStatus(status);
-        ticketRepository.save(ticket); // This will save ticket, new status, and new note.
+        ticketRepository.save(ticket); // Save the ticket with the new status and notes
+        return ticket;
     }
 
+    /**
+     * Retrieves all tickets from the repository.
+     * @return List of all TicketModel objects.
+     */
     public List<TicketModel> findAllTickets() {
         return ticketRepository.findAll();
     }
 
+    /**
+     * Saves a new or existing ticket to the repository.
+     * @param ticket The TicketModel object to be saved.
+     */
     public void saveTicket(TicketModel ticket) {
         ticketRepository.save(ticket);
     }
 
+    /**
+     * Retrieves a specific ticket by its ID.
+     * @param id The ID of the ticket to be retrieved.
+     * @return The TicketModel object with the specified ID.
+     */
     public TicketModel findTicketById(Long id) {
-        return ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("Ticket not found"));
+        return ticketRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Ticket not found"));
     }
 
+    /**
+     * Deletes a ticket by its ID.
+     * @param id The ID of the ticket to be deleted.
+     */
     public void deleteTicketById(Long id) {
         ticketRepository.deleteById(id);
     }
