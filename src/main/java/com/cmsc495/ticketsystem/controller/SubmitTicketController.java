@@ -64,12 +64,19 @@ public class SubmitTicketController {
         }
     }
 
+
     private void sendEmail(TicketModel ticketModel, String email, String department, String issueType) {
         try {
-            emailService.sendEmail(email, department + issueType + ticketModel.getFormattedDate(), "Ticket submitted! " +
-                    "A tech will get to work on your ticket immediately. " +
+            // Construct a descriptive subject line
+            String subject = department + " - " + issueType + " (" + ticketModel.getFormattedDate() + ")";
+
+            // Construct the body of the email
+            String body = "Ticket submitted! A tech will get to work on your ticket immediately. " +
                     "We will keep you updated with the status of your ticket until it is closed. " +
-                    "Thank you for your patience.");
+                    "Thank you for your patience.";
+
+            // Send the email with the formatted subject and body
+            emailService.sendEmail(email, subject, body);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
