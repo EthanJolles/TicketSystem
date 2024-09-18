@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.cmsc495.ticketsystem.model.MyUser;
+import com.cmsc495.ticketsystem.model.MyUserModel;
 import com.cmsc495.ticketsystem.repository.MyUserRepository;
 import java.util.Optional;
 import java.util.List;
@@ -31,7 +31,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<MyUser> user = myUserRepository.findByUsername(username);
+        Optional<MyUserModel> user = myUserRepository.findByUsername(username);
         if(user.isPresent()) {
             var userObj = user.get();
             return User.builder()
@@ -44,13 +44,13 @@ public class MyUserDetailService implements UserDetailsService {
         }
     }
 
-    public void saveMyUser(MyUser myUser) {
+    public void saveMyUser(MyUserModel myUser) {
         String encodedPassword = passwordEncoder.encode(myUser.getPassword());  //changes user password to encrypted version to store in database
         myUser.setPassword(encodedPassword);
         myUserRepository.save(myUser);
     }
 
-    public List<MyUser> findAllUsers() {
+    public List<MyUserModel> findAllUsers() {
         return myUserRepository.findAll();
     }
 

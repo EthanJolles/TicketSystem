@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.cmsc495.ticketsystem.model.MyUser;
+import com.cmsc495.ticketsystem.model.MyUserModel;
 import com.cmsc495.ticketsystem.service.MyUserDetailService;
 
 @Controller
@@ -28,7 +28,7 @@ public class ManageUsersController {
      * view*/
     @GetMapping("/admin/manage-users")
     public String showManageUsersPage(Model model) {
-        List<MyUser> myUserList = myUserDetailService.findAllUsers();
+        List<MyUserModel> myUserList = myUserDetailService.findAllUsers();
         model.addAttribute("myUserList", myUserList);
         return "manage-users";
     }
@@ -41,7 +41,7 @@ public class ManageUsersController {
             Model model) {
 
         // Create and save MyUser object
-        MyUser myUser = new MyUser(username, password);
+        MyUserModel myUser = new MyUserModel(username, password);
         myUserDetailService.saveMyUser(myUser);
         return "redirect:/admin/manage-users";
     }

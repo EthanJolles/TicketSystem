@@ -11,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class MyUser {
+public class MyUserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) //id automatically generated for use as key in database
     private Long id;
@@ -19,9 +19,9 @@ public class MyUser {
     private String password;
     private String role = "User";
 
-    public MyUser() {};
+    public MyUserModel() {};
 
-    public MyUser (String username, String password) {
+    public MyUserModel (String username, String password) {
         this.username = username;
         this.password = password;
     }
