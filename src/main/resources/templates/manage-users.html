@@ -18,7 +18,9 @@
     <header>
         <nav>
             <div>
-                ITMS
+                <a href="/">
+                    ITMS
+                </a>
             </div>
             <ul>
                 <li><a href="/">Submit A Ticket</a></li>
@@ -57,13 +59,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Iterate over the myUsers list -->
-                    <tr th:each="myUser : ${myUserList}">
-                        <td th:text="${myUser.username}"></td>
-                        <td th:text="${myUser.role}"></td>
+                    <!-- Iterate over the adminUsers list -->
+                    <tr th:each="adminUser : ${adminUserList}">
+                        <td th:text="${adminUser.username}"></td>
+                        <td th:text="${adminUser.role}"></td>
                         <td>
                             <!--Link to delete user-->
-                            <form th:action="@{/admin/delete-user/{id}(id=${myUser.id})}" method="post" style="display:inline;">
+                            <form th:action="@{/admin/delete-user/{id}(id=${adminUser.id})}" method="post" style="display:inline;">
                                 <input type="submit" value="Delete" />
                             </form>
                         </td>
