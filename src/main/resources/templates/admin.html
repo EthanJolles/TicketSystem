@@ -1,7 +1,6 @@
 <!--
   ITMS - A CMSC 495 Project
   Group 2
-  07 SEP 24
   This HTML file defines the Admin Dashboard page for the IT Management System (ITMS).
   
   Features:
@@ -29,10 +28,13 @@
     <header>
         <nav>
             <div>
-                ITMS
+                <a href="/">
+                    ITMS
+                </a>
             </div>
             <ul>
                 <li><a href="/">Submit A Ticket</a></li>
+                <li><a href="/admin/manage-users">Manage Users</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
@@ -77,18 +79,11 @@
             </div>
 
         </section>
-        <!--<section>
-            <div class="form-group">
-                <form action="/logout" method="post">
-                    <button type="submit" class="btn">Logout</button>
-                </form>
-            </div>
-        </section>-->
     </main>
 
     <footer>
         <div>
-            <p>&copy; 2024 IT Department. All rights reserved.</p>
+            <p>&copy; 2024 ITMS. All rights reserved.</p>
         </div>
     </footer>
 

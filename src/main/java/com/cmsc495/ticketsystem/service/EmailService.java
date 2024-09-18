@@ -1,3 +1,8 @@
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ * Handles functions related to sending automated emails 
+ */
+
 package com.cmsc495.ticketsystem.service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;

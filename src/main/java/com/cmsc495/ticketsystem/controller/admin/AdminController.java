@@ -1,6 +1,5 @@
 /* ITMS - A CMSC 495 Project
  * Group 2
- * 07 SEP 24
  * This is the AdminController class.
  * This class handles the request for the admin page.
  * It uses the TicketService to retrieve all the tickets from the database
@@ -8,7 +7,7 @@
  * Additionally, it sends an email notification when a ticket is closed.
  */
 
-package com.cmsc495.ticketsystem.controller;
+package com.cmsc495.ticketsystem.controller.admin;
 
 import com.cmsc495.ticketsystem.model.TicketModel;
 import com.cmsc495.ticketsystem.service.TicketService;
@@ -17,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -40,4 +36,3 @@ public class AdminController {
         return "admin";
     }
 }
-

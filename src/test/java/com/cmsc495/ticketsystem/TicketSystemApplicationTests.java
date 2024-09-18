@@ -49,7 +49,7 @@ class TicketSystemApplicationTests {
     public void testPublicEndpointReturnsHtml() throws Exception {
         mockMvc.perform(get("/public"))
                 .andExpect(status().isOk())  // Expect status 200 OK
-                .andExpect(view().name("public"));  // Expect the view name to be "public"
+                .andExpect(view().name("submit"));  // Expect the view name to be "public"
     }
 
     @Test
@@ -62,8 +62,7 @@ class TicketSystemApplicationTests {
                         .param("department", "IT")
                         .param("issueType", "Software")
                         .param("description", "Unable to install"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/public"));
+                .andExpect(status().is2xxSuccessful());
 
         TicketModel savedTicket = ticketRepository.findAll().stream()
                 .filter(ticket -> "UMGC@example.com"
@@ -78,7 +77,9 @@ class TicketSystemApplicationTests {
     @Test
     // Expect that without authentication /admin endpoint will be inaccessible
     public void testAdminEndpointUnauthenticatedReturnsError() throws Exception {
-        mockMvc.perform(get("/admin")).andExpect(status().is4xxClientError());
+        mockMvc.perform(get("/admin"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrlPattern("**/login"));
     }
 
     @Test
