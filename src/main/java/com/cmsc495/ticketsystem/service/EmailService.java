@@ -28,7 +28,7 @@ public class EmailService {
     @Value("${google.refresh-token}")
     private String refreshToken;
 
-    public boolean sendEmail(String toEmail, String subject, String body) throws Exception {
+    public void sendEmail(String toEmail, String subject, String body) throws Exception {
         // Build the GoogleCredential object with your OAuth2 details
         GoogleCredential credential = new GoogleCredential.Builder()
                 .setClientSecrets(clientId, clientSecret)
@@ -63,6 +63,5 @@ public class EmailService {
         } else {
             throw new Exception("Failed to refresh access token");
         }
-        return false;
     }
 }
