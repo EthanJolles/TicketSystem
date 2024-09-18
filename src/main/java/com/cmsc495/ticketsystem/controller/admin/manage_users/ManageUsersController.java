@@ -3,7 +3,7 @@
  * This class handles requests related to users
  */
 
-package com.cmsc495.ticketsystem.controller;
+package com.cmsc495.ticketsystem.controller.admin.manage_users;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.cmsc495.ticketsystem.model.MyUserModel;
-import com.cmsc495.ticketsystem.service.MyUserDetailService;
+import com.cmsc495.ticketsystem.model.AdminUserModel;
+import com.cmsc495.ticketsystem.service.AdminUserDetailService;
 
 @Controller
 public class ManageUsersController {
 
     @Autowired
-    private MyUserDetailService myUserDetailService;
+    private AdminUserDetailService adminUserDetailService;
 
-    /*navigates to manage-users page and uses myUserDetailService to retrieve all
+    /*navigates to manage-users page and uses AdminUserDetailService to retrieve all
      * the users from the database
-     * and adds them to the myUser model, making them available to the manage-users
+     * and adds them to the AdminUser model, making them available to the manage-users
      * view*/
     @GetMapping("/admin/manage-users")
     public String showManageUsersPage(Model model) {
-        List<MyUserModel> myUserList = myUserDetailService.findAllUsers();
-        model.addAttribute("myUserList", myUserList);
+        List<AdminUserModel> adminUserList = adminUserDetailService.findAllUsers();
+        model.addAttribute("adminUserList", adminUserList);
         return "manage-users";
     }
 
@@ -40,15 +40,15 @@ public class ManageUsersController {
             @RequestParam String password,
             Model model) {
 
-        // Create and save MyUser object
-        MyUserModel myUser = new MyUserModel(username, password);
-        myUserDetailService.saveMyUser(myUser);
+        // Create and save AdminUser object
+        AdminUserModel adminUserModel = new AdminUserModel(username, password);
+        adminUserDetailService.saveAdminUser(adminUserModel);
         return "redirect:/admin/manage-users";
     }
 
     @PostMapping("/admin/delete-user/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
-        myUserDetailService.deleteUserById(id); // Call service to delete the user
+        adminUserDetailService.deleteUserById(id); // Call service to delete the user
         return "redirect:/admin/manage-users"; // Redirect back to the manage-users page
     }
 }

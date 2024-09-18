@@ -6,7 +6,7 @@
  * and adds them to the model, making them available to the admin view.
  */
 
-package com.cmsc495.ticketsystem.controller;
+package com.cmsc495.ticketsystem.controller.admin;
 
 import com.cmsc495.ticketsystem.model.TicketModel;
 import com.cmsc495.ticketsystem.service.TicketService;

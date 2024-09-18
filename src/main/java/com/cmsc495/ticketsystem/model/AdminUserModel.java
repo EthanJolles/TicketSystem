@@ -11,17 +11,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class MyUserModel {
+public class AdminUserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) //id automatically generated for use as key in database
     private Long id;
     private String username;
     private String password;
-    private String role = "User";
+    private String role = "Admin";
 
-    public MyUserModel() {};
+    public AdminUserModel() {};
 
-    public MyUserModel (String username, String password) {
+    public AdminUserModel(String username, String password) {
         this.username = username;
         this.password = password;
     }

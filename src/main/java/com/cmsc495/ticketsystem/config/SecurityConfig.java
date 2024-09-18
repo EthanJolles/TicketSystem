@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import com.cmsc495.ticketsystem.service.MyUserDetailService;
+import com.cmsc495.ticketsystem.service.AdminUserDetailService;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @Configuration
@@ -22,7 +22,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 public class SecurityConfig {
 
         @Autowired
-        private MyUserDetailService userDetailService;
+        private AdminUserDetailService userDetailService;
 
         @Autowired
         private PasswordEncoder passwordEncoder;

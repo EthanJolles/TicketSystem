@@ -8,6 +8,7 @@
 
 package com.cmsc495.ticketsystem.service;
 
+import com.cmsc495.ticketsystem.repository.AdminUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,23 +16,22 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.cmsc495.ticketsystem.model.MyUserModel;
-import com.cmsc495.ticketsystem.repository.MyUserRepository;
+import com.cmsc495.ticketsystem.model.AdminUserModel;
 import java.util.Optional;
 import java.util.List;
 
 @Service
-public class MyUserDetailService implements UserDetailsService {
+public class AdminUserDetailService implements UserDetailsService {
 
     @Autowired
-    private MyUserRepository myUserRepository;
+    private AdminUserRepository adminUserRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<MyUserModel> user = myUserRepository.findByUsername(username);
+        Optional<AdminUserModel> user = adminUserRepository.findByUsername(username);
         if(user.isPresent()) {
             var userObj = user.get();
             return User.builder()
@@ -44,18 +44,18 @@ public class MyUserDetailService implements UserDetailsService {
         }
     }
 
-    public void saveMyUser(MyUserModel myUser) {
+    public void saveAdminUser(AdminUserModel myUser) {
         String encodedPassword = passwordEncoder.encode(myUser.getPassword());  //changes user password to encrypted version to store in database
         myUser.setPassword(encodedPassword);
-        myUserRepository.save(myUser);
+        adminUserRepository.save(myUser);
     }
 
-    public List<MyUserModel> findAllUsers() {
-        return myUserRepository.findAll();
+    public List<AdminUserModel> findAllUsers() {
+        return adminUserRepository.findAll();
     }
 
     public void deleteUserById(Long id) {
-        myUserRepository.deleteById(id);
+        adminUserRepository.deleteById(id);
     }
 
 }

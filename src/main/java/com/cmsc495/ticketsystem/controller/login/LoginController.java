@@ -3,7 +3,7 @@
  * Controls redirects for login/logout
  */
 
-package com.cmsc495.ticketsystem.controller;
+package com.cmsc495.ticketsystem.controller.login;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

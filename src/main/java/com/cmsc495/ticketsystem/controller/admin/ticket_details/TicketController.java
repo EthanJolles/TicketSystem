@@ -6,7 +6,7 @@
  * including adding troubleshooting notes.
  */
 
-package com.cmsc495.ticketsystem.controller;
+package com.cmsc495.ticketsystem.controller.admin.ticket_details;
 
 import com.cmsc495.ticketsystem.model.TicketModel;
 import com.cmsc495.ticketsystem.service.TicketService;

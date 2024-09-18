@@ -9,9 +9,9 @@ package com.cmsc495.ticketsystem.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.cmsc495.ticketsystem.model.MyUserModel;
+import com.cmsc495.ticketsystem.model.AdminUserModel;
 import java.util.Optional;
 
-public interface MyUserRepository extends JpaRepository<MyUserModel, Long> {
-    Optional<MyUserModel> findByUsername(String username);
+public interface AdminUserRepository extends JpaRepository<AdminUserModel, Long> {
+    Optional<AdminUserModel> findByUsername(String username);
 }
