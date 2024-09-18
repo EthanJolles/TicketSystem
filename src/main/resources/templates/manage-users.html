@@ -1,0 +1,86 @@
+<!--
+  ITMS - A CMSC 495 Project
+  Group 2
+  HTML for manage users page
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div>
+                <a href="/">
+                    ITMS
+                </a>
+            </div>
+            <ul>
+                <li><a href="/">Submit A Ticket</a></li>
+                <li><a href="/admin">AdminDashboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Manage Users</h1>
+        <div class="container">
+            <h2>Create New User</h2>
+            <form action="/admin/manage-users/submit" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn" type="submit">Create User</button>
+                </div>
+                
+            </form>
+        </div>
+        <div class="container table-wrapper">
+            <h2>Current Users</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Delete User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over the adminUsers list -->
+                    <tr th:each="adminUser : ${adminUserList}">
+                        <td th:text="${adminUser.username}"></td>
+                        <td th:text="${adminUser.role}"></td>
+                        <td>
+                            <!--Link to delete user-->
+                            <form th:action="@{/admin/delete-user/{id}(id=${adminUser.id})}" method="post" style="display:inline;">
+                                <input type="submit" value="Delete" />
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <p>&copy; 2024 ITMS. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
