@@ -1,7 +1,6 @@
 <!--
   ITMS - A CMSC 495 Project
   Group 2
-  07 SEP 24
   This HTML file defines the Ticket Details page for the IT Ticket System.
   
   Features:
@@ -49,17 +48,29 @@
       <label>Issue Type:</label> <span th:text="${ticket.issueType}"></span><br />
       <label>Description:</label>
       <p th:text="${ticket.description}"></p><br />
-      <label>Status:</label>
+      
+      <!-- Form for updating the ticket status -->
       <form th:action="@{/admin/ticket/update}" method="post">
         <input type="hidden" name="id" th:value="${ticket.id}" />
-        <select name="status">
+        
+        <label>Status:</label>
+        <select id="status" name="status" onchange="toggleRemoveCheckbox()">
           <option value="New" th:selected="${ticket.status == 'New'}">New</option>
           <option value="In Progress" th:selected="${ticket.status == 'In Progress'}">In Progress</option>
           <option value="Closed" th:selected="${ticket.status == 'Closed'}">Closed</option>
         </select>
         <br />
+
+        <!-- Checkbox for removing from the database -->
+        <div id="removeCheckboxContainer" style="display:none;">
+          <input type="checkbox" id="remove" name="remove" value="true">
+          <label for="remove">Remove from database</label>
+        </div>
+        <br />
+
         <label>Troubleshooting Notes:</label>
         <textarea name="notes" th:text="${ticket.troubleshootingNotes}"></textarea><br />
+        
         <button type="submit" class="btn">Update</button>
         <a href="/admin" class="btn cancel">Cancel</a>
       </form>
@@ -67,10 +78,28 @@
   </main>
 
   <footer>
-  <div>
-    <p>&copy; 2024 IT Department. All rights reserved.</p>
-  </div>
+    <div>
+      <p>&copy; 2024 ITMS. All rights reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    // Function to show the checkbox when "Closed" status is selected
+    function toggleRemoveCheckbox() {
+      var status = document.getElementById("status").value;
+      var removeCheckboxContainer = document.getElementById("removeCheckboxContainer");
+      
+      if (status === "Closed") {
+        removeCheckboxContainer.style.display = "block";
+      } else {
+        removeCheckboxContainer.style.display = "none";
+      }
+    }
+
+    // Call the function once when the page loads to check the initial status
+    toggleRemoveCheckbox();
+  </script>
+
 </body>
 
 </html>

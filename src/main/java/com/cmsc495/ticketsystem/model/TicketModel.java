@@ -1,6 +1,5 @@
 /* ITMS - A CMSC 495 Project
  * Group 2
- * 07 SEP 24
  * This is the TicketModel class.
  * This class represents the ticket entity in the ticketing system.
  * It includes fields such as the ticket's ID, status, creation date, and related details
@@ -12,7 +11,6 @@ package com.cmsc495.ticketsystem.model;
 
 import jakarta.persistence.*;
 import java.time.format.DateTimeFormatter;
-
 import java.time.LocalDate;
 
 @Entity

@@ -1,15 +1,13 @@
 <!--
   ITMS - A CMSC 495 Project
   Group 2
-  07 SEP 24  
-=======
   This HTML file defines the Submit page for the IT Management System (ITMS).
   
   Features:
-  - Allows user to navigate to admin page
-  - Displays a form that user can fill out for an IT ticket. 
-  - Upon submission, the informatin provided will be used to create a TicketModel.
-  - User cannot submit form until all information is provided.
+  - Displays a form that the user can fill out for submitting an IT ticket.
+  - Upon submission, the form is processed using JavaScript to handle success and error messages.
+  - JavaScript is used to submit the form asynchronously (via AJAX) and display a success message
+    if the ticket is submitted successfully or an error message if the submission fails.
 -->
 
 <!DOCTYPE html>
@@ -19,14 +17,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ITMS</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
+     
+
 <header>
     <nav>
         <div>
-            ITMS
+            <a href="/">
+                ITMS
+            </a>
         </div>
         <ul>
             <li><a href="/admin">Admin Login</a></li>
@@ -35,7 +41,7 @@
 </header>
 
 <main>
-    <h1>IT Management System</h1>
+    <h1>Information Technology Management System</h1>
 
     <div class="container">
         <section>
@@ -74,6 +80,15 @@
                 <div class="form-group">
                     <button type="submit" class="btn">Submit Ticket</button>
                 </div>
+                <!-- Success Message -->
+                 <div id="successMessage" class="alert alert-success" style="display: none;">
+                    Ticket submitted successfully! Please be patient while we fix your issue!
+                </div>
+    
+                <!-- Error Message -->
+                <div id="errorMessage" class="alert alert-danger" style="display: none;">
+                    There was an error submitting your ticket. Please try again.
+                </div>
             </form>
         </section>
     </div>
@@ -81,9 +96,51 @@
 
 <footer>
     <div>
-        <p>&copy; 2024 IT Department. All rights reserved.</p>
+        <p>&copy; 2024 ITMS. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("ticketForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting traditionally
+            console.log("Form submission intercepted by JavaScript.");
+
+            // Gather form data
+            var formData = new FormData(document.getElementById("ticketForm"));
+            console.log("FormData collected:", formData);
+
+            // Send an AJAX request to submit the form
+            fetch('/public/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log("Response received:", response);
+                if (response.ok) {
+                    // Display the success message
+                    document.getElementById("successMessage").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                    console.log("Success message displayed.");
+
+                    // Optionally clear the form
+                    document.getElementById("ticketForm").reset();
+                } else {
+                    // Display error message
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("successMessage").style.display = "none";
+                    console.error("Error: Failed to submit the form.");
+                }
+            })
+            .catch(error => {
+                // Display error message
+                document.getElementById("errorMessage").style.display = "block";
+                document.getElementById("successMessage").style.display = "none";
+                console.error("Error:", error);
+            });
+        });
+    });
+</script>
 
 </body>
 

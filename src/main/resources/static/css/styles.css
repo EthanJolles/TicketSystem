@@ -1,4 +1,6 @@
-/*-------------------------------Formatting for all pages---------------------------------------------*/
+/* ITMS - A CMSC 495 Project
+ * Group 2
+ *-------------------------------Formatting for all pages---------------------------------------------*/
 
 * {
     margin: 0;
@@ -89,6 +91,7 @@ h2 {
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 100px;
 }
 
 .btn {
@@ -114,7 +117,7 @@ footer {
     width: 100%;
 }
 
-/*--------------------------- Formatting for submit.html------------------------------------------ */
+/*--------------------------- Formatting for forms in submit.html, manage-users.html-------------------------------- */
 form {
     margin-bottom: 30px;
 }
@@ -252,4 +255,47 @@ th:nth-child(5), td:nth-child(5) {  /*Email column */
 .cancel:hover {
     text-decoration: none; 
 }
+
+/* Success message styling */
+#successMessage {
+    display: none; /* Initially hidden */
+    background-color: #d4edda; /* Light green background for success */
+    color: #155724; /* Dark green text for success message */
+    border: 1px solid #c3e6cb; /* Border for the success message */
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+/* Error message styling (if not already present) */
+#errorMessage {
+    display: none; /* Initially hidden */
+    background-color: #f8d7da; /* Light red background for error */
+    color: #721c24; /* Dark red text for error message */
+    border: 1px solid #f5c6cb; /* Border for the error message */
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+/* This lines up the checkbox and label on the titcket-details.html page
+when selecting to remove a database. */
+#removeCheckboxContainer {
+    display: inline-block; /* Ensure the container is inline */
+    margin-top: 1px; /* Optional: Add space above the container */
+}
+
+#removeCheckboxContainer input[type="checkbox"] {
+    display: inline-block; /* Keep the checkbox inline */
+    vertical-align: middle; /* Align it vertically */
+    margin-top: 8px; /* Adjust this value to move the checkbox down */
+}
+
+#removeCheckboxContainer label {
+    display: inline-block; /* Keep the label inline */
+    vertical-align: middle; /* Align the label vertically with the checkbox */
+    margin-left: 1px; /* Optional: add space between checkbox and label */
+}
+
 
