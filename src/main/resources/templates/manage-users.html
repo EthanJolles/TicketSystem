@@ -45,7 +45,8 @@
                 <div class="form-group">
                     <button class="btn" type="submit">Create User</button>
                 </div>
-                
+                <!-- Display the message from the controller if present in the case that username/password already exists-->
+                <div th:if="${userCreationStatus}" th:text="${userCreationStatus}" style="color: red;"></div>
             </form>
         </div>
         <div class="container table-wrapper">
@@ -65,7 +66,8 @@
                         <td th:text="${adminUser.role}"></td>
                         <td>
                             <!--Link to delete user-->
-                            <form th:action="@{/admin/delete-user/{id}(id=${adminUser.id})}" method="post" style="display:inline;">
+                            <form th:action="@{/admin/delete-user/{id}(id=${adminUser.id})}" method="post"
+                                style="display:inline;">
                                 <input type="submit" value="Delete" />
                             </form>
                         </td>
