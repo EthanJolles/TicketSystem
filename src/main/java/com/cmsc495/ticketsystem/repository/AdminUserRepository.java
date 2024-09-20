@@ -17,7 +17,4 @@ public interface AdminUserRepository extends JpaRepository<AdminUserModel, Long>
 
     // Check if a user with the given username already exists
     boolean existsByUsername(String username);
-    
-    // Check if a user with the same password hash exists (less common)
-    boolean existsByPassword(String password);
 }

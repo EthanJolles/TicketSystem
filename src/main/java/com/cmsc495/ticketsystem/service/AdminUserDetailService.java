@@ -51,10 +51,6 @@ public class AdminUserDetailService implements UserDetailsService {
         }
 
         String encodedPassword = passwordEncoder.encode(myUser.getPassword());  //changes user password to encrypted version to store in database
-        // Check if the password already exists
-        if (adminUserRepository.existsByPassword(encodedPassword)) {
-            return "Password is already in use";
-        }
         myUser.setPassword(encodedPassword);
         adminUserRepository.save(myUser);
         return "User Creation Successful";
