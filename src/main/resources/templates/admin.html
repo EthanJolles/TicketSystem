@@ -35,7 +35,11 @@
             <ul>
                 <li><a href="/">Submit A Ticket</a></li>
                 <li><a href="/admin/manage-users">Manage Users</a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <form class="logout-form" th:action="@{/logout}" method="post">
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                </li>
             </ul>
         </nav>
     </header>

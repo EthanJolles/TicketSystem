@@ -25,7 +25,11 @@
             <ul>
                 <li><a href="/">Submit A Ticket</a></li>
                 <li><a href="/admin">AdminDashboard</a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <form th:action="@{/logout}" class="logout-form" method="post">
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                </li>
             </ul>
         </nav>
     </header>
@@ -33,8 +37,7 @@
         <h1>Manage Users</h1>
         <div class="container">
             <h2>Create New User</h2>
-            <!--<form action="/admin/manage-users/submit" method="post">-->
-            <form th:action="@{/admin/manage-users/submit}" method="post">
+            <form th:action="@{/admin/manage-users/submit}" class="logout-form" method="post">
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" name="username" placeholder="Username" required>
