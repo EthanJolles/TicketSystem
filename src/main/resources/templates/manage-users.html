@@ -33,7 +33,8 @@
         <h1>Manage Users</h1>
         <div class="container">
             <h2>Create New User</h2>
-            <form action="/admin/manage-users/submit" method="post">
+            <!--<form action="/admin/manage-users/submit" method="post">-->
+            <form th:action="@{/admin/manage-users/submit}" method="post">
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" name="username" placeholder="Username" required>
