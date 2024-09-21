@@ -44,10 +44,16 @@ public class AdminUserDetailService implements UserDetailsService {
         }
     }
 
-    public void saveAdminUser(AdminUserModel myUser) {
+    public String saveAdminUser(AdminUserModel myUser) {
+        // Check if the username already exists
+        if (adminUserRepository.existsByUsername(myUser.getUsername())) {
+            return "Username already exists";
+        }
+
         String encodedPassword = passwordEncoder.encode(myUser.getPassword());  //changes user password to encrypted version to store in database
         myUser.setPassword(encodedPassword);
         adminUserRepository.save(myUser);
+        return "User Creation Successful";
     }
 
     public List<AdminUserModel> findAllUsers() {

@@ -25,7 +25,11 @@
             <ul>
                 <li><a href="/">Submit A Ticket</a></li>
                 <li><a href="/admin">AdminDashboard</a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li>
+                    <form th:action="@{/logout}" class="logout-form" method="post">
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                </li>
             </ul>
         </nav>
     </header>
@@ -33,7 +37,7 @@
         <h1>Manage Users</h1>
         <div class="container">
             <h2>Create New User</h2>
-            <form action="/admin/manage-users/submit" method="post">
+            <form th:action="@{/admin/manage-users/submit}" class="logout-form" method="post">
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" name="username" placeholder="Username" required>
@@ -45,7 +49,8 @@
                 <div class="form-group">
                     <button class="btn" type="submit">Create User</button>
                 </div>
-                
+                <!-- Display the message from the controller if present in the case that username/password already exists-->
+                <div th:if="${userCreationStatus}" th:text="${userCreationStatus}" style="color: red;"></div>
             </form>
         </div>
         <div class="container table-wrapper">
@@ -65,7 +70,8 @@
                         <td th:text="${adminUser.role}"></td>
                         <td>
                             <!--Link to delete user-->
-                            <form th:action="@{/admin/delete-user/{id}(id=${adminUser.id})}" method="post" style="display:inline;">
+                            <form th:action="@{/admin/delete-user/{id}(id=${adminUser.id})}" method="post"
+                                style="display:inline;">
                                 <input type="submit" value="Delete" />
                             </form>
                         </td>

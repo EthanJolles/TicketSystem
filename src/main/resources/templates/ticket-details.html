@@ -31,7 +31,11 @@
       </div>
       <ul>
         <li><a href="/admin">Admin Login</a></li>
-        <li><a href="/logout">Logout</a></li>
+        <li>
+          <form th:action="@{/logout}" class="logout-form" method="post">
+              <button type="submit" class="logout-button">Logout</button>
+          </form>
+      </li>
       </ul>
     </nav>
   </header>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.cmsc495.ticketsystem.model.AdminUserModel;
 import com.cmsc495.ticketsystem.service.AdminUserDetailService;
 
@@ -38,11 +40,12 @@ public class ManageUsersController {
     @PostMapping("/admin/manage-users/submit")
     public String createUser(@RequestParam String username,
             @RequestParam String password,
-            Model model) {
+            RedirectAttributes redirectAttributes) {
 
         // Create and save AdminUser object
         AdminUserModel adminUserModel = new AdminUserModel(username, password);
-        adminUserDetailService.saveAdminUser(adminUserModel);
+        String userCreationStatus = adminUserDetailService.saveAdminUser(adminUserModel);
+        redirectAttributes.addFlashAttribute("userCreationStatus", userCreationStatus);
         return "redirect:/admin/manage-users";
     }
 
